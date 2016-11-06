@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Monty-Xavier</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+    <script src="semantic/dist/semantic.min.js"></script>
+  </head>
+  <body>
+    <script>
+      var briefcaseTrue = `
+        <div class="ui shape column true">
+          <div class="sides">
+            <div class="active side briefcases" id="true">
+              <img src="imgs/briefcase.jpg" width="50%" hspace="50" />
+            </div>
+            <div class="side">$250,000</div>
+          </div>
+        </div>
+      `
+      var briefcaseFalse = `
+        <div class="ui shape column false">
+          <div class="sides">
+            <div class="active side briefcases" id="false">
+              <img src="imgs/briefcase.jpg" width="50%" hspace="50" />
+            </div>
+            <div class="side">$0</div>
+          </div>
+        </div>
+      `
+    </script>
+
+    <div class="ui centered grid">
+      <div class="five column row">
+      </div>
+    </div>
+    Behind one of these breifcase is a $250,000.
+    Behind each of the other 23 breifcase is a voucher of 0% discount!!!
+    Click on the briefcase that you think the $250,000 is behind.
+    OR
+    <script src="index.js"></script>
+
+  </body>
+</html>
