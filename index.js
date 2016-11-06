@@ -1,7 +1,19 @@
 $(document).ready(function () {
+  $('.icon').click(function() {
+    $('.ui.modal').modal('show');
+  })
+
+  moneyBriefcase();
+  create()
+  shuffle(array)
 
   // on click of any briefcase, dont open it
   $('.briefcases').click(function () {
+
+    $('.briefcases').toggleClass('briefcases 2BC')
+
+    $('#choice').remove()
+    $(this).parent().append('<p id="choice"><i>Your Choice</i></p>')
 
     if (this.getAttribute('id') == 'true') { // if true
       console.log('im true');
@@ -12,6 +24,15 @@ $(document).ready(function () {
       $('.false').shape('flip left');
 
       // remove from html
+      var timer = 0
+      var clear = setInterval(function() {
+        $('.false').remove()
+        timer += 1
+        if (timer > 0) {
+          clearInterval(clear)
+        }
+      }, 1500);
+
     } else {
       $(this).closest('.false').toggleClass('false maybe')
       console.log('im false');
@@ -20,23 +41,47 @@ $(document).ready(function () {
       $('.false').shape('flip left');
 
       // remove from html
-      setInterval(function() {
+      var timer = 0
+      var clear = setInterval(function() {
         $('.false').remove()
-      }, 2000);
+        timer += 1
+        if (timer > 0) {
+          clearInterval(clear)
+        }
+      }, 1500);
     }
+
+    $('.2BC').click(function () {
+      console.log('hello');
+      // open both to show which one has the money
+      $('.true').shape('flip left');
+      $('.maybe').shape('flip left');
+
+      // restart the game button
+      $('#button').toggleClass('hidden')
+    })
+
+    $('#replay').click(function() {
+      location.reload();
+      // console.log('replay lei');
+      // $('.shape').remove()
+      // $('.button').remove()
+      // console.log(array);
+      // array =[]
+      // console.log('refresh array', array);
+      // console.log(bCMoney);
+      // moneyBriefcase();
+      // console.log(bCMoney);
+      // create()
+      // // shuffle(array)
+    })
   });
   // if is the special one, find 1 fake briefcase  OTHERWISE find the real one
   // open the 23 others
   // ask to click on briefcases again
-  // open both to show which one has the money
-  // restart the game button
+
 
 });
-
-
-$('.briefcases')
-.transition('horizontal flip')
-;
 
 console.log("connected to Xavier's deal or no deal");
 
@@ -46,33 +91,49 @@ function moneyBriefcase () {
   bCMoney = Math.floor((Math.random() * 25) + 1);
 }
 
-moneyBriefcase();
+var array = [];
 
 // Create 25 briefcases
-var array = [];
-for (var i = 1; i < 26; i++) { // Loop and push into array array
-  if (i === bCMoney) {
-    console.log(i);
-    $('.row').append(briefcaseTrue);
-  } else {
-    array.push(i);
-    $('.row').append(
-      `
-        <div class="ui shape column false">
-          <div class="sides">
-            <div class="active side briefcases" id="false${i}">
-              <img src="imgs/briefcase.jpg" width="50%" hspace="50" />
+function create() {
+  for (var i = 1; i < 26; i++) { // Loop and push into array array
+    if (i === bCMoney) {
+      console.log(i);
+      $('.row').append(
+        `
+          <div class="ui shape column true">
+            <div class="sides">
+              <div class="active side briefcases" id="true">
+                <img src="imgs/briefcase.jpg" width="50%" hspace="50" />
+              </div>
+              <div class="side"><h1 style="color:red;">$250,000</h1></div>
             </div>
-            <div class="side">$0</div>
           </div>
-        </div>
-      `
-    );
+        `
+      );
+      console.log('appending true briefcase');
+
+    } else {
+      array.push(i);
+      $('.row').append(
+        `
+          <div class="ui shape column false">
+            <div class="sides">
+              <div class="active side briefcases" id="false${i}">
+                <img src="imgs/briefcase.jpg" width="50%" hspace="50" />
+              </div>
+              <div class="side">
+                <img src="imgs/zero.jpg" width="50%" hspace="50" />
+              </div>
+            </div>
+          </div>
+        `
+      );
+      console.log('appending false ones');
+
+    }
   }
+  console.log('loop ended');
 }
-
-shuffle(array)
-
 
 // -----Fisher Yates Card Shuffling-----
 function shuffle (array) {
