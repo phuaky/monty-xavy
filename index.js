@@ -13,13 +13,13 @@ $(document).ready(function () {
     $('.briefcases').toggleClass('briefcases 2BC')
 
     $('#choice').remove()
-    $(this).parent().append('<p id="choice"><i>Your Choice</i></p>')
+    $(this).parent().append('<p><h3><center id="choice">Stay with your choice</center></h3></p>')
 
     if (this.getAttribute('id') == 'true') { // if true
-      console.log('im true');
       // draw random number from array
       // let it be the disguise briefcase
       $('#false' + array[0]).closest('.false').toggleClass('false maybe')
+      $('#false'+ array[0]).append('<p id="choice"><h3 style="color:red;"><center>Switch</center></h3></p>')
       // open all the other briefcase
       $('.false').shape('flip left');
 
@@ -34,8 +34,8 @@ $(document).ready(function () {
       }, 1500);
 
     } else {
+      $('#true').append('<p id="choice"><h3 style="color:red;"><center>Switch</center></h3></p>')
       $(this).closest('.false').toggleClass('false maybe')
-      console.log('im false');
       // find the real one
       // open all the others
       $('.false').shape('flip left');
@@ -52,7 +52,6 @@ $(document).ready(function () {
     }
 
     $('.2BC').click(function () {
-      console.log('hello');
       // open both to show which one has the money
       $('.true').shape('flip left');
       $('.maybe').shape('flip left');
@@ -76,14 +75,8 @@ $(document).ready(function () {
       // // shuffle(array)
     })
   });
-  // if is the special one, find 1 fake briefcase  OTHERWISE find the real one
-  // open the 23 others
-  // ask to click on briefcases again
-
 
 });
-
-console.log("connected to Xavier's deal or no deal");
 
 var bCMoney;
 // Randomly choose which briefcase has $250,000
@@ -97,7 +90,7 @@ var array = [];
 function create() {
   for (var i = 1; i < 26; i++) { // Loop and push into array array
     if (i === bCMoney) {
-      console.log(i);
+      console.log("Briefcase " + i + " is the one with money");
       $('.row').append(
         `
           <div class="ui shape column true">
@@ -110,8 +103,6 @@ function create() {
           </div>
         `
       );
-      console.log('appending true briefcase');
-
     } else {
       array.push(i);
       $('.row').append(
@@ -128,11 +119,8 @@ function create() {
           </div>
         `
       );
-      console.log('appending false ones');
-
     }
   }
-  console.log('loop ended');
 }
 
 // -----Fisher Yates Card Shuffling-----
@@ -150,7 +138,6 @@ function shuffle (array) {
     array[m] = array[i];
     array[i] = t;
   }
-  console.log(array);
   return array;
 }
 
