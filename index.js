@@ -10,16 +10,17 @@ $(document).ready(function () {
   // on click of any briefcase, dont open it
   $('.briefcases').click(function () {
 
+    $('h3').remove()
+
     $('.briefcases').toggleClass('briefcases 2BC')
 
-    $('#choice').remove()
-    $(this).parent().append('<p><h3><center id="choice">Stay with your choice</center></h3></p>')
+    $(this).parent().append('<h3><center id="choice">Stay with your choice</center></h3>')
 
     if (this.getAttribute('id') == 'true') { // if true
       // draw random number from array
       // let it be the disguise briefcase
       $('#false' + array[0]).closest('.false').toggleClass('false maybe')
-      $('#false'+ array[0]).append('<p id="choice"><h3 style="color:red;"><center>Switch</center></h3></p>')
+      $('#false'+ array[0]).append('<h3 style="color:red;"><center id="choice">Switch</center></h3>')
       // open all the other briefcase
       $('.false').shape('flip left');
 
@@ -34,7 +35,7 @@ $(document).ready(function () {
       }, 1500);
 
     } else {
-      $('#true').append('<p id="choice"><h3 style="color:red;"><center>Switch</center></h3></p>')
+      $('#true').append('<h3 style="color:red;"><center id="choice">Switch</center></h3>')
       $(this).closest('.false').toggleClass('false maybe')
       // find the real one
       // open all the others
@@ -52,6 +53,7 @@ $(document).ready(function () {
     }
 
     $('.2BC').click(function () {
+      $('#choice').remove()
       // open both to show which one has the money
       $('.true').shape('flip left');
       $('.maybe').shape('flip left');
